@@ -1,60 +1,137 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+}
 
 html {
-    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+    font: 62.5% 'Open Sans', sans-serif;
+    color: #333;
+    background-color: #fff;
 }
 
-.app {
-    margin: 0 20%;
+body {
+    font-size: 1.5rem;
 }
 
-.title {
-    text-align: center;
-    color: #222;
+*,
+*:before,
+*:after {
+    background-color:inherit;
+    box-sizing: inherit;
+    font-weight: normal
 }
 
-.capitalize {
-    text-transform: capitalize;
+h1 {
+    margin: 2rem 0 1rem 2rem;
+    font-size: 2.6rem;
 }
 
-.strong {
-    font-weight: 500;
-}
-
-h2,
-p {
-    margin: 0;
-}
-
-li {
-    color: #222;
+.no-title h1 {
+    display: none;
 }
 
 h2 {
-    color: #616161;
+    font-size: 1.8rem;
+    margin: 0 0 .5rem 0;
+    position: relative;
+    z-index: 1
 }
 
-.version {
-    color: #464646;
+.supported {
+    opacity: .7;
+    font-size: 1.3rem;
 }
 
-.subheading {
-    font-size: 12px;
-    color: #aaa;
+.versions {
+    font-size: 1.8rem
 }
+
 
 .browsers {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.browser {
+.browsers li {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    margin: 2rem;
+}
+
+.browsers .icon {
+    width: 5rem;
+    height: 5rem;
+    margin: 0 auto .3rem;
+    background-repeat: no-repeat;
+    background-image: url(media/icons.png);
+    transform: scale(.8);
+    position: relative;
+}
+
+.browsers [class^="chrome"] .icon {
+    background-position: 0 0;
+}
+
+.browsers [class^="edge"] .icon {
+    background-position: 0 -60px;
+}
+
+.browsers [class^="firefox"] .icon {
+    background-position: 0 -120px;
+}
+
+.browsers [class^="internet-explorer"] .icon {
+    background-position: 0 -180px;
+}
+
+.browsers [class^="safari"] .icon {
+    background-position: 0 -240px;
+}
+
+.browsers [class*="-android"] .icon::before,
+.browsers [class*="-ios"] .icon::before,
+.browsers [class*="-android"] .icon::after,
+.browsers [class*="-ios"] .icon::after {
+    content: '';
+    display: block;
+    width: 5rem;
+    height: 3.5rem;
+    transform: scale(.7);
+    position: absolute;
+    bottom: -1.5rem;
+    right: -3rem;
+    background-repeat: inherit;
+    border-radius: 1rem;
+    box-sizing: content-box;
+    padding: 1rem;
+}
+
+.browsers [class*="-android"] .icon::before,
+.browsers [class*="-ios"] .icon::before {
+    opacity: .7;
+}
+
+.browsers [class*="-android"] .icon::after,
+.browsers [class*="-ios"] .icon::after {
+    background-image: inherit;
+    background-color:transparent;
+}
+
+.browsers [class*="-android"] .icon::after {
+    background-position: center -300px;
+}
+
+.browsers [class*="-ios"] .icon::after {
+    background-position: center -360px;
 }
