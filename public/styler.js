@@ -9,6 +9,9 @@
     if(['false', '0'].includes(config.get('title'))){
         root.parentElement.classList.add('no-title');
     }
+    if(window.parent !== window.top){
+        d.querySelector('#repo-link').remove();
+    }
     config.forEach((value, key) => {
         if(typeof style.getPropertyValue(key) !== 'undefined'){
             root.style[key] = value;

@@ -9,7 +9,7 @@ https://oat-sa.github.io/browserslist-app-tao
 There are two ways to consume these data, either via API or in an iFrame.
 
 ### API 
-A simple JSON API is available at [oat-sa.github.io/browserslist-app-tao/api.json](https://oat-sa.github.io/browserslist-app-tao/api.json). If you wish you also download a copy of the icon set as [png](/src/media/icons.png) or [psd](/src/media/icons.psd).
+A simple JSON API is available at [oat-sa.github.io/browserslist-app-tao/api.json](https://oat-sa.github.io/browserslist-app-tao/api.json). If you wish you can also download a copy of the icon set as [png](/src/media/icons.png) or [psd](/src/media/icons.psd).
 
 ### JavaScript example
 ```javascript
@@ -27,7 +27,7 @@ Alternatively you can embed the page in an `<iframe>` element. You can pass any 
 ```
 
 ### Fancy setup with CSS overwriting
-Optionally you can overwrite the styles of the `<body>` element and remove the page heading by adding parameters to the `<iframe>` URL. 
+Optionally you can overwrite the styles of the `<body>` element and remove the page heading by adding parameters to the `<iframe>` URL. The link to the repository will be removed by default.
 
 ```php
 <?php
