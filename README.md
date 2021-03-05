@@ -35,6 +35,7 @@ $params = [
     'background-color' => '#336',
     'color' => 'silver',
     'font-family' => 'Comic Sans MS',
+    'transform' => 'scale(.8)', // iframe will remain at the top left when scaled
     'title' => false // this one removes the title, values can be `false` or `0`
 ];
 ?>
