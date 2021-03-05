@@ -8,9 +8,7 @@
     if(['false', '0'].includes(config.get('title'))){
         root.classList.add('no-title');
     }
-    if(window.parent !== window.top){
-        root.classList.add('no-repo');
-    }
+    root.classList.toggle('in-iframe', window.parent !== window.top);
     config.forEach((value, key) => {
         if(typeof style.getPropertyValue(key) !== 'undefined'){
             root.style[key] = value;

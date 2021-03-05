@@ -47,10 +47,6 @@ h1 {
     text-decoration: underline
 }
 
-.no-repo #repo-link {
-    display:none;
-}
-
 #repo-link::before {
     content: '';
     width: 2.4rem;
@@ -61,6 +57,10 @@ h1 {
     background-size: contain;
     position: relative;
     top: .6rem
+}
+
+.in-iframe #repo-link {
+    display:none;
 }
 
 .no-title h1 {
