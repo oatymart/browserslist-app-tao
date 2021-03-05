@@ -12,6 +12,9 @@
     config.forEach((value, key) => {
         if(typeof style.getPropertyValue(key) !== 'undefined'){
             root.style[key] = value;
+            if(key === 'transform' && value.includes('scale') && !config.get('transform-origin')){
+                root.style.transformOrigin = '0 0';
+            }
         }
     })
 })(document)
