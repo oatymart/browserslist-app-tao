@@ -1,51 +1,48 @@
 import './App.css';
-import browserCodeTransformer from './constants/browsers.js';
-import browserslist from 'browserslist';
-import oatBrowserListConfig from '@oat-sa/browserslist-config-tao';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fab } from '@fortawesome/free-brands-svg-icons';
-
-library.add(fab);
+import getBrowserListing from './data-provider/browsers';
 
 function App() {
-    const supportedBrowsers = browserslist(oatBrowserListConfig);
-
-    const groupBrowsers = () => {
-        return supportedBrowsers.reduce((list, browser) => {
-            const key = browser.split(' ')[0];
-            const version = browser.split(' ')[1];
-
-            if (!list[key]) {
-                list[key] = version;
-            } else {
-                list[key] = list[key] + ', ' + version;
-            }
-
-            return list;
-        }, {});
-    };
 
     const render = () => {
-        const supportedBrowsers = groupBrowsers();
 
-        return Object.entries(supportedBrowsers).map(([browser, version]) => (
-            <li className="browser" key={browser}>
-                <FontAwesomeIcon icon={['fab', browserCodeTransformer[browser]]} size="6x" />
-                {browser.indexOf('and_ff') > -1 ? (
-                    <h2>Android Firefox</h2>
-                ) : browser.indexOf('and_chr') > -1 ? (
-                    <h2>Android Chrome</h2>
-                ) : browser.indexOf('ios_saf') > -1 ? (
-                    <h2>iOS Safari</h2>
-                ) : browser.indexOf('ie') > -1 ? (
-                    <h2>Internet Explorer</h2>
-                ) : (
-                    <h2 className="capitalize">{browser}</h2>
-                )}
+        /**
+         * Format browser and OS as `Browser/OS` or `Browser`
+         * @param {Object} entry
+         * @returns {String}
+         */
+        const label = entry => entry.os ? entry.browser + '/' + entry.os : entry.browser;
 
-                <p className="subheading">Supported Versions</p>
-                <span className="strong version">{version}</span>
+        /**
+         * Format browser and OS as `browser-os` or `browser`
+         * @param {Object} entry
+         * @returns {String}
+         */
+        const key = entry => (entry.os ?
+            entry.browser + '-' + entry.os :
+            entry.browser).toLowerCase().replace(/\W+/g, '-');
+
+        /**
+         * Format [version-a, version-b] as `version-a, version-b`
+         * @param {Object} entry
+         * @returns {String}
+         */
+        const versions = entry => entry.versions.join(', ');
+
+        /**
+         * Return either `Version` or `Versions`, depending on the actual number of versions
+         * @param {Object} entry
+         * @returns {String}
+         */
+        const vLabel = entry => entry.versions.length === 1 && !entry.versions[0].includes('-') ?
+            'Version' :
+            'Versions';
+
+        return getBrowserListing().map((entry) => (
+            <li className={key(entry)} key={key(entry)}>
+                <span className="icon"> </span>
+                <h2 className="title">{label(entry)}</h2>
+                <span className="supported">{vLabel(entry)}</span>
+                <span className="versions">{versions(entry)}</span>
             </li>
         ));
     };
