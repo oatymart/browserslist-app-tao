@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Update dev dependencies and deploy
-        uses: oat-sa/browserslist-app-tao@main
+        uses: actions/checkout@v2
       - run: |
           npm update --save-dev
           npm run build
