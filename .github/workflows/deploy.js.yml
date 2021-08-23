@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Update dev dependencies and deploy
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
         env:
           NPM_TOKEN: ${{ secrets.BUILD_NPM_TOKEN }}
       - run: |
