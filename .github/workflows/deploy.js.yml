@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v2
         env:
           NPM_TOKEN: ${{ secrets.BUILD_NPM_TOKEN }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GH_TOKEN }}
 
       - run: |
           npm update --save-dev
