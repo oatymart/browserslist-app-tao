@@ -1,4 +1,4 @@
-# Browser suppported by TAO
+# Browsers supported by TAO
 
 This app lists all the browser versions supported by TAO in real time. The app uses the browserslist config from https://github.com/oat-sa/browserslist-config-tao and displays the list of supported browsers.
 
@@ -8,7 +8,7 @@ https://oat-sa.github.io/browserslist-app-tao
 ## Using the list inside a web page
 There are two ways to consume these data, either via API or in an iFrame.
 
-### API 
+### API
 A simple JSON API is available at [oat-sa.github.io/browserslist-app-tao/api.json](https://oat-sa.github.io/browserslist-app-tao/api.json). If you wish you can also download a copy of the icon set as [png](/src/media/icons.png) or [psd](/src/media/icons.psd).
 
 ### JavaScript example
@@ -19,7 +19,7 @@ fetch('https://oat-sa.github.io/browserslist-app-tao/api.json')
 ```
 
 ### iFrame
-Alternatively you can embed the page in an `<iframe>` element. You can pass any number of options as URL parameters to adapt the look and feel. 
+Alternatively you can embed the page in an `<iframe>` element. You can pass any number of options as URL parameters to adapt the look and feel.
 
 ### Basic setup
 ```html
@@ -43,8 +43,7 @@ $params = [
 <iframe src="https://oat-sa.github.io/browserslist-app-tao?<?=http_build_query($params)?>" height="…" width="…"></iframe>
 ```
 
-While the above example uses PHP, you can obviously do this manually as well. Be careful to encode the parameters, otherwise the `#` on color values will break the query string. 
-
+While the above example uses PHP, you can obviously do this manually as well. Be careful to encode the parameters, otherwise the `#` on color values will break the query string.
 
 ## Working on the code
 
@@ -54,4 +53,22 @@ While the above example uses PHP, you can obviously do this manually as well. Be
 
 ### Run
 
+The app will be available on http://localhost:3000:
+
 `npm run start`
+
+### Updating the browsers
+
+The following script regenerates the file `public/api.json` (by reading the configuration exported by the installed dependency `@oat-sa/browserslist-config-tao/index.js` and passing that string into `browserslist`):
+
+`npm run build-api`
+
+The resulting updated file should be committed.
+
+> In case the browsers list fails to update to the most recent one, it is sometimes required to remove `node_modules` and `package-lock.json` and freshly install the dependencies.
+
+### Deployment
+
+There is a script to build the API and the app, and deploy the result to [Github Pages](https://oat-sa.github.io/browserslist-app-tao):
+
+`npm run deploy`
