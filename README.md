@@ -57,15 +57,21 @@ The app will be available on http://localhost:3000:
 
 `npm run start`
 
-### Updating the browsers
+### Update
 
-The following script regenerates the file `public/api.json` (by reading the configuration exported by the installed dependency `@oat-sa/browserslist-config-tao/index.js` and passing that string into `browserslist`):
+There is a 2-step process to make the latest browsers available in the API:
+
+#### 1. Update browserslist db
+
+The following script installs the latest version of `caniuse-lite` in the package-lock.json. Without it, the API can receive outdated browsers. The resulting updated file should be committed.
+
+`npm run update-db`
+
+#### 2. Update the API file
+
+The following script regenerates the file `public/api.json` (by reading the configuration exported by the installed dependency `@oat-sa/browserslist-config-tao/index.js` and passing that string into `browserslist`). The resulting updated file should be committed.
 
 `npm run build-api`
-
-The resulting updated file should be committed.
-
-> In case the browsers list fails to update to the most recent one, it is sometimes required to remove `node_modules` and `package-lock.json` and freshly install the dependencies.
 
 ### Deployment
 
