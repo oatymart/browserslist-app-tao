@@ -21,7 +21,8 @@
         "eject": "react-scripts eject",
         "predeploy": "npm run build",
         "deploy": "gh-pages -d build",
-        "build-api": "node ./src/api-builder/api.js"
+        "build-api": "node ./src/api-builder/api.js",
+        "update-db": "npx browserslist@latest --update-db"
     },
     "eslintConfig": {
         "extends": [
