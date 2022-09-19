@@ -21,6 +21,13 @@ jobs:
         run: |
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
+      - name: Setup Node 🚧
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+          registry-url: https://registry.npmjs.org
+      - name: Install packages
+        run: npm ci
       - name: Update Browserslist database and create PR if applies
         uses: c2corg/browserslist-update-action@v2
         with:
