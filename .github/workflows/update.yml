@@ -32,7 +32,17 @@ jobs:
       - name: Update Browserslist database (old way)
         run: npx browserslist@latest --update-db
       
+      - name: Switch branch
+        uses: peterjgrainger/action-create-branch@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          branch: 'ci/update-browserslist'
+      
       - name: Create PR
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh pr create --title "Update browserslist database" --label "ci" --body "test"
+        run: |
+          git add .
+          git commit -m "ci: update browserslist database"
+          gh pr create --title "Update browserslist database" --label "ci" --body "test"
