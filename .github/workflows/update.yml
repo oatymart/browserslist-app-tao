@@ -45,4 +45,4 @@ jobs:
         run: |
           git add .
           git commit -m "ci: update browserslist database"
-          gh pr create --head "c/update-browserslist" --title "Update browserslist database" --label "ci" --body "test"
+          gh pr create --head "ci/update-browserslist" --title "Update browserslist database" --label "ci" --body "test"
