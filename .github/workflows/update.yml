@@ -41,14 +41,14 @@ jobs:
           message: 'ci: update browserslist database'
           new_branch: 'ci/update-browserslist'
           
-      - name: Read PR template
-        id: pr-template
-        uses: juliangruber/read-file-action@v1
-        with:
-          path: ./.github/workflows/template.md
+      #- name: Read PR template
+      #  id: pr-template
+      #  uses: juliangruber/read-file-action@v1
+      #  with:
+      #    path: ./.github/workflows/template.md
  
       - name: Create PR
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr create --base "main" --head "ci/update-browserslist" --title "Update browserslist database" --label "ci" --body ${{ steps.pr-template.outputs.content }}
+          gh pr create --base "main" --head "ci/update-browserslist" --title "Update browserslist database" --label "ci" --body-file "./.github/workflows/template.md"
