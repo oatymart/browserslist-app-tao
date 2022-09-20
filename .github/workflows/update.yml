@@ -20,14 +20,7 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v3
-      
-      #- name: Switch branch
-      #  uses: peterjgrainger/action-create-branch@v2.2.0
-      #  env:
-      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #  with:
-      #    branch: 'ci/update-browserslist'
-
+  
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
@@ -37,18 +30,25 @@ jobs:
         run: npm ci
       
       - name: Update Browserslist database (old way)
-        run: |
-          npx browserslist@latest --update-db     
-          # git commit -am "ci: update browserslist database"
+        run: npx browserslist@latest --update-db     
+          
+      - name: Rebuild API
+        run: npm run build-api
           
       - name: Add & commit changes
         uses: EndBug/add-and-commit@v9
         with:
           message: 'ci: update browserslist database'
           new_branch: 'ci/update-browserslist'
+          
+      - name: Read PR template
+        id: pr-template
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./.github/workflows/template.md
  
       - name: Create PR
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr create --base "main" --head "ci/update-browserslist" --title "Update browserslist database" --label "ci" --body "test"
+          gh pr create --base "main" --head "ci/update-browserslist" --title "Update browserslist database" --label "ci" --body ${{ steps.pr-template.outputs.content }}
