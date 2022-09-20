@@ -40,12 +40,6 @@ jobs:
         with:
           message: 'ci: update browserslist database'
           new_branch: 'ci/update-browserslist'
-          
-      #- name: Read PR template
-      #  id: pr-template
-      #  uses: juliangruber/read-file-action@v1
-      #  with:
-      #    path: ./.github/workflows/template.md
  
       - name: Create PR
         env:
