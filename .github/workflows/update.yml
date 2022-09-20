@@ -21,6 +21,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       
+      - name: Switch branch
+        uses: peterjgrainger/action-create-branch@v2.2.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          branch: 'ci/update-browserslist'
+
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
@@ -30,19 +37,12 @@ jobs:
         run: npm ci
       
       - name: Update Browserslist database (old way)
-        run: npx browserslist@latest --update-db
-      
-      - name: Switch branch
-        uses: peterjgrainger/action-create-branch@v2.2.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          branch: 'ci/update-browserslist'
-      
+        run: |
+          npx browserslist@latest --update-db     
+          git commit -am "ci: update browserslist database"
+ 
       - name: Create PR
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git add .
-          git commit -m "ci: update browserslist database"
           gh pr create --head "ci/update-browserslist" --title "Update browserslist database" --label "ci" --body "test"
